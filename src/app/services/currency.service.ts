@@ -43,12 +43,13 @@ export class CurrencyService implements OnDestroy {
 
     this.klineUpdates$ = new Subject<any>();
 
-    const wsUrl = `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`;
+    let wsUrl = `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`;
     this.klineWs = new WebSocket(wsUrl);
 
     this.klineWs.onmessage = (event) => {
       const message = JSON.parse(event.data);
       if (message.k && message.k.i === interval) {
+        console.log('message.k', message.k)
         this.klineUpdates$.next(message.k as KlineUpdate);
       }
     };

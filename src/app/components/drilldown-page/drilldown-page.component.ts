@@ -4,7 +4,7 @@ import { CurrencyService } from '../../services/currency.service';
 import { createChart, IChartApi, ISeriesApi, UTCTimestamp } from 'lightweight-charts';
 import { CommonModule } from '@angular/common';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
 @Component({
@@ -118,22 +118,32 @@ export class DrilldownPageComponent implements OnInit, OnDestroy {
       this.klineSubscription.unsubscribe();
     }
 
-    this.interval = newInterval;
-    this.currencyService.startKlineSocket(this.symbol, this.interval);
-    this.loadKlineData();
+    this.currencyService.stopKlineSocket();
 
-    this.klineSubscription = this.currencyService.getKlineUpdates().subscribe((data) => {
-      if (this.lineSeries) {
-        const newData = {
-          time: Math.floor(data.t / 1000) as UTCTimestamp,
-          open: parseFloat(data.o),
-          high: parseFloat(data.h),
-          low: parseFloat(data.l),
-          close: parseFloat(data.c),
-        };
-        this.lineSeries.update(newData);
-      }
-    });
+    this.interval = newInterval;
+    if (this.lineSeries) {
+        this.lineSeries.setData([]);
+    }
+
+    setTimeout(() => {
+        this.currencyService.startKlineSocket(this.symbol, this.interval);
+        this.loadKlineData();
+
+        this.klineSubscription = this.currencyService.getKlineUpdates()
+            .pipe(filter((data) => data.i === this.interval))
+            .subscribe((data) => {
+                if (this.lineSeries) {
+                    const newData = {
+                        time: Math.floor(data.t / 1000) as UTCTimestamp,
+                        open: parseFloat(data.o),
+                        high: parseFloat(data.h),
+                        low: parseFloat(data.l),
+                        close: parseFloat(data.c),
+                    };
+                    this.lineSeries.update(newData);
+                }
+            });
+    }, 300);
   }
 
   goBack(): void {
