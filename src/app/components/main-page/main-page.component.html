@@ -1,0 +1,21 @@
+<div class="controls">
+  <label for="sortSelect">Sort by:</label>
+  <select id="sortSelect" (change)="onSortChange($event)">
+    <option value="volume">Volume</option>
+    <option value="askPrice">Ask Price</option>
+    <option value="count">Count</option>
+  </select>
+</div>
+
+<div class="currency-list">
+  <mat-card *ngFor="let pair of displayedPairs"
+            [ngClass]="{'up': pair.isRising, 'down': pair.isFalling}"
+            (click)="onDrilldown(pair.symbol)">
+    <mat-card-title>{{ pair.symbol }}</mat-card-title>
+    <mat-card-content [style.color]="pair.priceColor">{{ pair.lastPrice | number:'1.1-8' }}</mat-card-content>
+  </mat-card>
+</div>
+
+<div class="load-more" *ngIf="displayedPairs.length < currencyPairs.length">
+  <button mat-raised-button color="primary" (click)="loadMore()">Load More</button>
+</div>

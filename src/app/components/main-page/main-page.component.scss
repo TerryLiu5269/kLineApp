@@ -1,0 +1,179 @@
+::ng-deep .mat-mdc-card-content:last-child {
+  padding-bottom: 0 !important;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 12px 12px;
+
+  label {
+    font-size: 1rem;
+  }
+
+  select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px;
+    outline: none;
+  }
+}
+
+.currency-list {
+  display: grid;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px 128px;
+
+  mat-card {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    mat-card-title {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    mat-card-content {
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .currency-list {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 8px;
+
+    mat-card {
+      height: 80px;
+
+      mat-card-title {
+        font-size: 0.9rem;
+      }
+
+      mat-card-content {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 376px) {
+  .currency-list {
+    grid-template-columns: repeat(6, 1fr);
+
+    mat-card {
+      height: 100px;
+
+      mat-card-title {
+        font-size: 1rem;
+      }
+
+      mat-card-content {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+  button {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #67b6f6;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: #1976d2;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      background-color: #1565c0;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+@keyframes flashUp {
+  0% {
+    border-color: #96fb99;
+    color: #49de4e;
+  }
+
+  50% {
+    border-color: #49de4e;
+    color: #49de4e;
+  }
+
+  100% {
+    border-color: transparent;
+    color: #49de4e;
+  }
+}
+
+@keyframes flashDown {
+  0% {
+    border-color: #ff9191;
+    color: #ff3030;
+  }
+
+  50% {
+    border-color: #ff3030;
+    color: #ff3030;
+  }
+
+  100% {
+    border-color: transparent;
+    color: #ff3030;
+  }
+}
+
+.currency-list mat-card {
+  border: 2px solid transparent;
+
+  &.up {
+    animation: flashUp 0.8s ease-in-out;
+    transition: border-color 0.7s, color 0.8s;
+  }
+
+  &.down {
+    animation: flashDown 0.8s ease-in-out;
+    transition: border-color 0.7s, color 0.8s;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    color: #333;
+  }
+}

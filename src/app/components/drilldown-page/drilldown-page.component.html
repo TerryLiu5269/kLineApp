@@ -1,0 +1,15 @@
+<div class="controls">
+  <button class="back-button" (click)="goBack()">Back</button>
+  <select (change)="onIntervalChange($event)" [value]="interval">
+    <option value="1m">1 Minute</option>
+    <option value="1h">1 Hour</option>
+    <option value="1d">1 Day</option>
+  </select>
+  <label class="symbol-label">{{ symbol }}</label>
+</div>
+
+<div class="chart-container">
+  <div class="chart" id="chart"></div>
+</div>
+
+

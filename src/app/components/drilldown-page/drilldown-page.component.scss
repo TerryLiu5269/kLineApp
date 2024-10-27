@@ -1,0 +1,49 @@
+.controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .symbol-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-left: 12px;
+    color: #333;
+  }
+
+  select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px;
+    outline: none;
+  }
+}
+
+.back-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #67b6f6;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: #1976d2;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    background-color: #1565c0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.chart {
+  margin: 8px 12px;
+}
