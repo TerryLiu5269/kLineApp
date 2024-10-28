@@ -1,34 +1,17 @@
-::ng-deep .mat-mdc-card-content:last-child {
-  padding-bottom: 0 !important;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 12px 12px;
-
-  label {
-    font-size: 1rem;
-  }
-
-  select {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-left: 10px;
-    outline: none;
-  }
-}
-
 .currency-list {
   display: grid;
   gap: 16px;
   justify-content: center;
   padding: 16px 128px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); // 卡片自適應欄位數量
+
+  @media (max-width: 590px) {
+    grid-template-columns: repeat(2, minmax(150px, 1fr)); // 保持兩欄，且最小寬度為150px
+  }
 
   mat-card {
+    min-width: 150px; // 設置卡片最小寬度
+    max-width: 200px; // 設置卡片最大寬度，避免過度擴展
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -46,51 +29,17 @@
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    mat-card-title {
-      font-size: 1rem;
-      font-weight: bold;
-    }
-
+    mat-card-title,
     mat-card-content {
       font-size: 0.9rem;
       transition: color 0.3s;
+      white-space: nowrap; // 強制單行顯示
+      overflow: hidden; // 隱藏溢出的文字
+      text-overflow: ellipsis; // 用省略號顯示過長的文字
     }
-  }
-}
 
-@media (max-width: 375px) {
-  .currency-list {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 8px;
-
-    mat-card {
-      height: 80px;
-
-      mat-card-title {
-        font-size: 0.9rem;
-      }
-
-      mat-card-content {
-        font-size: 0.8rem;
-      }
-    }
-  }
-}
-
-@media (min-width: 376px) {
-  .currency-list {
-    grid-template-columns: repeat(6, 1fr);
-
-    mat-card {
-      height: 100px;
-
-      mat-card-title {
-        font-size: 1rem;
-      }
-
-      mat-card-content {
-        font-size: 0.9rem;
-      }
+    mat-card-title {
+      font-weight: bold;
     }
   }
 }
