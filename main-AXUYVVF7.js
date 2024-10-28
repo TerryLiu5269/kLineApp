@@ -1,1 +1,0 @@
-import{a as i}from"./chunk-N2XWG3MS.js";import{ta as p,ua as r,ya as t}from"./chunk-L2WA2HZR.js";var e=[{path:"",loadChildren:()=>import("./chunk-4FY6CLPK.js").then(o=>o.MainPageModule)},{path:"drilldown/:symbol",loadChildren:()=>import("./chunk-3UQ7RZK3.js").then(o=>o.DrilldownPageModule)}];var m={providers:[t(e),p()]};r(i,m).catch(o=>console.error(o));
